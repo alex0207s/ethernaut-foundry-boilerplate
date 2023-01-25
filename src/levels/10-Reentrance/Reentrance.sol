@@ -22,7 +22,9 @@ contract Reentrance {
       if(result) {
         _amount;
       }
-      balances[msg.sender] -= _amount;
+      unchecked {
+        balances[msg.sender] -= _amount; //We disable overflow/underflow check because the original compiler version is 0.6.12
+      }
     }
   }
 
