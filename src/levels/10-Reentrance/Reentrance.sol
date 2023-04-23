@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0; // change from 0.6.12
+pragma solidity ^0.6.12;
 
-import 'openzeppelin-contracts/utils/math/SafeMath.sol';
+import 'openzeppelin-contracts-06/math/SafeMath.sol';
 
 contract Reentrance {
   
@@ -22,9 +22,7 @@ contract Reentrance {
       if(result) {
         _amount;
       }
-      unchecked {
-        balances[msg.sender] -= _amount; //We disable overflow/underflow check because the original compiler version is 0.6.12
-      }
+      balances[msg.sender] -= _amount;
     }
   }
 
