@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0; //change from 0.6.0
+pragma solidity ^0.6.0;
 
-import 'src/core/Level.sol';
+import 'src/core/Level-06.sol';
 import './Fallout.sol';
 
 contract FalloutFactory is Level {
