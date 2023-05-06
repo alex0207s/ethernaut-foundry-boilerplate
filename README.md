@@ -2,14 +2,15 @@
 
 This repo is intended for beginners to play OpenZeppelin's [Ethernaut]('https://ethernaut.openzeppelin.com/') and write PoC (proof-of-concept) exploit codes with Foundry.
 
-## Warnings - some challenges are removed due to compiler incompatibility
+## ~~Warnings - some challenges are removed due to compiler incompatibility~~
 
-The following challenges are not part of this repo:
+~~The following challenges are not part of this repo:~~
 
-- [Alien Codex](https://ethernaut.openzeppelin.com/level/0x40055E69E7EB12620c8CCBCCAb1F187883301c30)
-- [Motorbike](https://ethernaut.openzeppelin.com/level/0x9b261b23cE149422DE75907C6ac0C30cEc4e652A)
+~~- [Alien Codex](https://ethernaut.openzeppelin.com/level/0x40055E69E7EB12620c8CCBCCAb1F187883301c30)~~
 
-Those challenges rely on old version of solidity to showcase bugs/exploits. Therefore, we'll remove them to prevent compilation errors.
+~~- [Motorbike](https://ethernaut.openzeppelin.com/level/0x9b261b23cE149422DE75907C6ac0C30cEc4e652A)~~
+
+~~Those challenges rely on old version of solidity to showcase bugs/exploits. Therefore, we'll remove them to prevent compilation errors.~~
 
 # Getting Started
 
@@ -29,15 +30,7 @@ cd ethernaut-foundry-boilerplate
 
 ## Create your own solutions
 
-Create a new test `XX-<LevelName>.t.sol` in the `test/` directory. </br></br>All of the test contract will follow the same template:
-
-1. `setup()` function for initiating the main Ethernaut contract
-2. `test<LevelName>Hack()` function for
-   - Create a level instance
-   - Execute the attack logic to solve challenge
-   - Submit the solution and validate your result
-
-Here's an example of a test contract
+create a new test file `XX-<LevelName>.t.sol` in the `test/` directory. </br></br>Here's an example of a test contract for challenge 1 Fallback
 
 ```solidity
 pragma solidity ^0.8.10;
@@ -45,17 +38,19 @@ pragma solidity ^0.8.10;
 import "ds-test/test.sol";
 import "forge-std/Vm.sol";
 
-import "src/levels/01-Fallback/FallbackFactory.sol";
 import "src/core/Ethernaut.sol";
+import "src/levels/01-Fallback/FallbackFactory.sol";
 
 contract FallbackTest is DSTest {
-    Vm vm = Vm(address(HEVM_ADDRESS));
+    Vm vm = Vm(address(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D));
     Ethernaut ethernaut;
-    address eoaAddress = address(100);
+    address hacker = vm.addr(1); // generate the random address with given private key
 
     function setUp() public {
         ethernaut = new Ethernaut();
-        vm.deal(eoaAddress, 1 ether);
+
+        // set hacker's balance to 1 Ether, use it when you need!
+        // vm.deal(hacker, 1 ether);
     }
 
     function testFallbackHack() public {
@@ -64,14 +59,16 @@ contract FallbackTest is DSTest {
         /////////////////
         FallbackFactory fallbackFactory = new FallbackFactory();
         ethernaut.registerLevel(fallbackFactory);
-        vm.startPrank(eoaAddress);
+        vm.startPrank(hacker);
         address levelAddress = ethernaut.createLevelInstance(fallbackFactory);
         Fallback ethernautFallback = Fallback(payable(levelAddress));
 
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-        // code the attack logic here
+
+        // implement your solution here
+
 
         //////////////////////
         // LEVEL SUBMISSION //
@@ -85,7 +82,13 @@ contract FallbackTest is DSTest {
 }
 ```
 
-</br>All you need to do is to implement the attack logic to solve the challenge in the LEVEL ATTACK block of `test<LevelName>Hack()` function. You're allowed to create another attack contract if you needed.
+1. `setup()` function for initiating the main Ethernaut contract
+2. `test<LevelName>Hack()` function for
+   - Creating a level instance
+   - Executing the attack logic to solve challenge
+   - Submitting the solution and validating your result
+
+</br>All you need to do is to implement your own PoC to solve the challenge in the **LEVEL ATTACK** block of `test<LevelName>Hack()` function. You are allowed to create a malicious contract to exploit vulnerable contracts if you need to.
 
 ## Run a Solution
 
@@ -128,6 +131,7 @@ libs = ['lib']
 remappings = [
     'ds-test/=lib/forge-std/lib/ds-test/src/',
     'forge-std/=lib/forge-std/src/',
+    'openzeppelin-contracts-06/=lib/openzeppelin-contracts-06/contracts/',
     'openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/',
 ]
 
@@ -144,9 +148,19 @@ forge remappings > remappings.txt
 
 Create `core` and `levels` folders under the `src/` to put the main logic contract and the challenge of Ethernaut
 
+We add `Ethernaut-05.sol`, `Level-05.sol`, `Ethernaut-06.sol`, `Level-06.sol` for challenge 19 Alien Codex and challenge 25 Motorbike
+
 ```bash
 └── src
    ├── core
+   │   ├── Ethernaut-05.sol
+   │   │
+   │   ├── Level-05.sol
+   │   │
+   │   ├── Ethernaut-06.sol
+   │   │
+   │   ├── Level-06.sol
+   │   │
    │   ├── Ethernaut.sol
    │   │
    │   └── Level.sol
@@ -158,9 +172,13 @@ Create `core` and `levels` folders under the `src/` to put the main logic contra
             └── <LevelName>Factory.sol
 ```
 
-- `/core`: it contains the two main logic contracts of the Ethernaut
+- `/core`: it contains the six main logic contracts of the Ethernaut
   - `Ethernaut.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/Ethernaut.sol). But we add return value for each function of `Ethernaut.sol`
   - `Level.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/levels/base/Level.sol).
+  - `Ethernaut-05.sol` same from `Ethernaut.sol` but for supporting the challenge 19 Alien Codex
+  - `Level-05.sol` same from `Level.sol` but for supporting the challenge 19 Alien Codex
+  - `Ethernaut-06.sol` same from `Ethernaut.sol` but for supporting the challenge 25 Motorbike
+  - `Level-06.sol` same from `Level.sol` but for supporting the challenge 25 Motorbike
 
 * `/levels`: it contains the all levels of the Ethernaut. For each level is composed of two contracts and can be found from [here](https://github.com/OpenZeppelin/ethernaut/tree/master/contracts/contracts/levels):
   - `<LevelName>.sol`
