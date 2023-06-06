@@ -26,6 +26,7 @@ foundryup
 ```sh
 git@github.com:alex0207s/ethernaut-foundry-boilerplate.git
 cd ethernaut-foundry-boilerplate
+forge install
 ```
 
 ## Create your own solutions
