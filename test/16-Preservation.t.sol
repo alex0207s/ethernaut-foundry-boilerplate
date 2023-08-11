@@ -39,9 +39,7 @@ contract PreservationTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

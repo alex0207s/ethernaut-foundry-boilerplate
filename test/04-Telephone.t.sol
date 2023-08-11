@@ -31,18 +31,16 @@ contract TelephoneTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
         TelephoneAttack attacker = new TelephoneAttack(ethernautTelephone);
-        
+
         emit log_named_address("hacker address", hacker);
         emit log_named_address("the owner of the victim contract before exploit", ethernautTelephone.owner());
         attacker.attack();
         emit log_named_address("the owner of the victim contract after exploit", ethernautTelephone.owner());
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

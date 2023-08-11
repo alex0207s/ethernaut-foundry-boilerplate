@@ -8,7 +8,6 @@ import "src/core/Ethernaut.sol";
 import "src/levels/14-GatekeeperTwo/GatekeeperTwoFactory.sol";
 import "src/levels/14-GatekeeperTwo/AttackGatekeeperTwo.sol";
 
-
 contract GatekeeperTwoTest is DSTest {
     Vm vm = Vm(address(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D));
     Ethernaut ethernaut;
@@ -17,7 +16,7 @@ contract GatekeeperTwoTest is DSTest {
         ethernaut = new Ethernaut();
     }
 
-    function testGatekeeperTwoHack() public {    
+    function testGatekeeperTwoHack() public {
         /////////////////
         // LEVEL SETUP //
         /////////////////
@@ -38,9 +37,7 @@ contract GatekeeperTwoTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

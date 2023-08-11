@@ -34,13 +34,11 @@ contract ShopTest is DSTest {
         emit log_named_uint("the price before exploit", ethernautShop.price());
         attacker.attack();
         emit log_named_uint("the price after exploit", ethernautShop.price());
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

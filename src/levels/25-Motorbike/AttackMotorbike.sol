@@ -3,7 +3,7 @@ pragma solidity <0.7.0;
 
 import "./Motorbike.sol";
 
-contract AttackMotorbike{
+contract AttackMotorbike {
     Engine immutable victim;
 
     constructor(address _victim) public {

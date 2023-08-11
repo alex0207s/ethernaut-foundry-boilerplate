@@ -32,13 +32,11 @@ contract DenialTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
         new AttackDenial(ethernautDenial);
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

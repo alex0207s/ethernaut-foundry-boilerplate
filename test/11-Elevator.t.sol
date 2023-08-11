@@ -32,7 +32,7 @@ contract ElevatorTest is DSTest {
         //////////////////
         emit log_named_string("top floor already? (before exploit)", ethernautElevator.top() ? "true" : "false");
 
-        AttackElevator attacker = new AttackElevator(ethernautElevator);        
+        AttackElevator attacker = new AttackElevator(ethernautElevator);
         attacker.attack();
 
         emit log_named_string("top floor already? (after exploit)", ethernautElevator.top() ? "true" : "false");
@@ -41,9 +41,7 @@ contract ElevatorTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

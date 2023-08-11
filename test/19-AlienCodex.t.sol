@@ -35,9 +35,7 @@ contract AlienCodexTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            address(uint160(address(levelAddress)))
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(address(uint160(address(levelAddress))));
         assert(levelSuccessfullyPassed);
     }
 }

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './GatekeeperOne.sol';
+import "./GatekeeperOne.sol";
 
-contract AttackGatekeeperOne{
+contract AttackGatekeeperOne {
     GatekeeperOne immutable victim;
     // event SuccessEvent(uint gas);
 
@@ -21,6 +21,6 @@ contract AttackGatekeeperOne{
         // }
 
         // use the above for loop to find the proper gas value first
-        victim.enter{gas: 8191*10+268}(gateKey);
+        victim.enter{gas: 8191 * 10 + 268}(gateKey);
     }
 }

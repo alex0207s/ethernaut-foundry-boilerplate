@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract AttackMagicNumber {
-    function deploy() external returns(address addr) {
+    function deploy() external returns (address addr) {
         /*
         Run time code - return 42
         // 1. Store 42 to memory
@@ -31,12 +31,12 @@ contract AttackMagicNumber {
         69602a60005260206000f3600052600a6016f3
         */
         bytes memory bytecode = hex"69602a60005260206000f3600052600a6016f3";
-        
+
         assembly {
             // create(value, offset, size)
             addr := create(0, add(bytecode, 0x20), 0x13)
         }
-        
+
         require(addr != address(0), "fail to create a contract");
     }
 }

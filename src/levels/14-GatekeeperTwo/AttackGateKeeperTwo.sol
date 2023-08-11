@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './GatekeeperTwo.sol';
+import "./GatekeeperTwo.sol";
 
-contract AttackGatekeeperTwo{
+contract AttackGatekeeperTwo {
     GatekeeperTwo immutable victim;
 
     constructor(GatekeeperTwo _victim) {

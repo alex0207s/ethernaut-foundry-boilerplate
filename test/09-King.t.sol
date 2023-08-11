@@ -33,18 +33,16 @@ contract KingTest is DSTest {
         //////////////////
         emit log_named_address("the king address before exploit", ethernautKing._king());
         AttackKing attacker = new AttackKing();
-        uint prize = ethernautKing.prize();
+        uint256 prize = ethernautKing.prize();
         attacker.attack{value: prize}(levelAddress);
         emit log_named_address("the king address after exploit", ethernautKing._king());
-        
+
         assertEq(ethernautKing._king(), address(attacker));
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

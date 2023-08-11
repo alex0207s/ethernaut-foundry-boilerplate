@@ -12,7 +12,7 @@ contract ForceTest is DSTest {
     Vm vm = Vm(address(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D));
     Ethernaut ethernaut;
     address hacker = vm.addr(1);
-  
+
     function setUp() public {
         ethernaut = new Ethernaut();
         vm.deal(hacker, 1 ether);
@@ -36,15 +36,13 @@ contract ForceTest is DSTest {
         emit log_named_uint("victim contract balance before exploit", address(ethernautForce).balance);
         attacker.attack{value: 1 ether}(levelAddress);
         emit log_named_uint("victim contract balance after exploit", address(ethernautForce).balance);
-        
+
         assertGt(address(ethernautForce).balance, 0 ether);
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

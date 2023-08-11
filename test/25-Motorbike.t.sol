@@ -31,20 +31,19 @@ contract MotorbikeTest is DSTest {
         //////////////////
 
         // load logic address
-        bytes32 data = vm.load(levelAddress, bytes32(0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc));
+        bytes32 data =
+            vm.load(levelAddress, bytes32(0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc));
         AttackMotorbike attacker = new AttackMotorbike(address(uint160(uint256(data))));
         attacker.attack();
 
         // selfdestruct has no effect in test
         // https://github.com/foundry-rs/foundry/issues/1543
         vm.etch(address(address(uint160(uint256(data)))), hex"");
- 
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

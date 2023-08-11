@@ -38,24 +38,22 @@ contract DoubleEntryPointTest is DSTest {
 
         // emit log("--------------------before exploit--------------------");
         // emit log_named_uint("the DET token in CryptoVault", ethernautDoubleEntryPoint.balanceOf(cryptoVaultAddress));
-        // emit log_named_uint("hacker's DET balance", ethernautDoubleEntryPoint.balanceOf(hacker));       
+        // emit log_named_uint("hacker's DET balance", ethernautDoubleEntryPoint.balanceOf(hacker));
         // cryptoVault.sweepToken(legacyToken);
         // emit log("--------------------after exploit--------------------");
         // emit log_named_uint("the DET token in CryptoVault", ethernautDoubleEntryPoint.balanceOf(cryptoVaultAddress));
-        // emit log_named_uint("hacker's DET balance", ethernautDoubleEntryPoint.balanceOf(hacker));        
-        
+        // emit log_named_uint("hacker's DET balance", ethernautDoubleEntryPoint.balanceOf(hacker));
+
         // use forta to prevent attacks
         address cryptoVaultAddress = ethernautDoubleEntryPoint.cryptoVault();
         DetectionBot db = new DetectionBot(cryptoVaultAddress);
         Forta forta = ethernautDoubleEntryPoint.forta();
         forta.setDetectionBot(address(db));
-        
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

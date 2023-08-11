@@ -31,9 +31,9 @@ contract CoinFlipTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
         CoinFlipAttack attacker = new CoinFlipAttack();
-        
-        for (uint i = 0; i < 10; i++) {
-            vm.roll(i+1);
+
+        for (uint256 i = 0; i < 10; i++) {
+            vm.roll(i + 1);
             ethernautCoinFlip.flip(attacker.guessGod());
         }
 
@@ -42,9 +42,7 @@ contract CoinFlipTest is DSTest {
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }
