@@ -70,7 +70,6 @@ contract FallbackTest is DSTest {
 
         // implement your solution here
 
-
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
@@ -85,9 +84,9 @@ contract FallbackTest is DSTest {
 
 1. `setup()` function for initiating the main Ethernaut contract
 2. `test<LevelName>Hack()` function for
-   - Creating a level instance
-   - Executing the attack logic to solve challenge
-   - Submitting the solution and validating your result
+    - Creating a level instance
+    - Executing the attack logic to solve challenge
+    - Submitting the solution and validating your result
 
 </br>All you need to do is to implement your own PoC to solve the challenge in the **LEVEL ATTACK** block of `test<LevelName>Hack()` function. You are allowed to create a malicious contract to exploit vulnerable contracts if you need to.
 
@@ -99,10 +98,18 @@ forge test --match-contract <LevelName>Test -v
 
 You can obtain more detailed information on the summary of passing and failing tests by using the -v flag to increase verbosity.
 
-- **Level 2 (`-vv`)**: Logs emitted during tests are also displayed. That includes assertion errors from tests, showing information such as expected vs actual.
-- **Level 3 (`-vvv`)**: Stack traces for failing tests are also displayed.
-- **Level 4 (`-vvvv`)**: Stack traces for all tests are displayed, and setup traces for failing tests are displayed.
-- **Level 5 (`-vvvvv`)**: Stack traces and setup traces are always displayed.
+-   **Level 2 (`-vv`)**: Logs emitted during tests are also displayed. That includes assertion errors from tests, showing information such as expected vs actual.
+-   **Level 3 (`-vvv`)**: Stack traces for failing tests are also displayed.
+-   **Level 4 (`-vvvv`)**: Stack traces for all tests are displayed, and setup traces for failing tests are displayed.
+-   **Level 5 (`-vvvvv`)**: Stack traces and setup traces are always displayed.
+
+## Checkout my solution
+
+I have placed the solutions of each challenge in the [solution](https://github.com/alex0207s/ethernaut-foundry-boilerplate/tree/solution) branch. You can access them with the following command:
+
+```sh
+git checkout -b solution origin/solution
+```
 
 </br>
 
@@ -114,10 +121,11 @@ You can obtain more detailed information on the summary of passing and failing t
 forge init ethernaut-foundry-boilerplate
 ```
 
-## Install libraries
+## Install Libraries
 
 ```sh
 forge install OpenZeppelin/openzeppelin-contracts
+forge install openzeppelin-contracts-06=OpenZeppelin/openzeppelin-contracts@v3.4.0
 ```
 
 ## Remapping
@@ -139,7 +147,7 @@ remappings = [
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
 ```
 
-then run
+Then run
 
 ```sh
 forge remappings > remappings.txt
@@ -173,14 +181,14 @@ We add `Ethernaut-05.sol`, `Level-05.sol`, `Ethernaut-06.sol`, `Level-06.sol` fo
             └── <LevelName>Factory.sol
 ```
 
-- `/core`: it contains the six main logic contracts of the Ethernaut
-  - `Ethernaut.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/Ethernaut.sol). But we add return value for each function of `Ethernaut.sol`
-  - `Level.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/levels/base/Level.sol).
-  - `Ethernaut-05.sol` same from `Ethernaut.sol` but for supporting the challenge 19 Alien Codex
-  - `Level-05.sol` same from `Level.sol` but for supporting the challenge 19 Alien Codex
-  - `Ethernaut-06.sol` same from `Ethernaut.sol` but for supporting the challenge 25 Motorbike
-  - `Level-06.sol` same from `Level.sol` but for supporting the challenge 25 Motorbike
+-   `/core`: it contains the six main logic contracts of the Ethernaut
+    -   `Ethernaut.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/Ethernaut.sol). But we add return value for each function of `Ethernaut.sol`
+    -   `Level.sol` token from [here](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/levels/base/Level.sol).
+    -   `Ethernaut-05.sol` same from `Ethernaut.sol` but for supporting the challenge 19 Alien Codex
+    -   `Level-05.sol` same from `Level.sol` but for supporting the challenge 19 Alien Codex
+    -   `Ethernaut-06.sol` same from `Ethernaut.sol` but for supporting the challenge 25 Motorbike
+    -   `Level-06.sol` same from `Level.sol` but for supporting the challenge 25 Motorbike
 
-* `/levels`: it contains the all levels of the Ethernaut. For each level is composed of two contracts and can be found from [here](https://github.com/OpenZeppelin/ethernaut/tree/master/contracts/contracts/levels):
-  - `<LevelName>.sol`
-  - `<LevelName>Factory.sol`
+*   `/levels`: it contains the all levels of the Ethernaut. For each level is composed of two contracts and can be found from [here](https://github.com/OpenZeppelin/ethernaut/tree/master/contracts/contracts/levels):
+    -   `<LevelName>.sol`
+    -   `<LevelName>Factory.sol`
