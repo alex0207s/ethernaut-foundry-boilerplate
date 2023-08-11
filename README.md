@@ -2,6 +2,36 @@
 
 This repo is intended for beginners to play OpenZeppelin's [Ethernaut]('https://ethernaut.openzeppelin.com/') and write PoC (proof-of-concept) exploit codes with Foundry.
 
+-   [x] Level01 Fallback
+-   [x] Level02 Fallout
+-   [x] Level03 Coin Flip
+-   [x] Level04 Telephone
+-   [x] Level05 Token
+-   [x] Level06 Delegation
+-   [x] Level07 Force
+-   [x] Level08 Vault
+-   [x] Level09 King
+-   [x] Level10 Re-entrancy
+-   [x] Level11 Elevator
+-   [x] Level12 Privacy
+-   [x] Level13 Gatekeeper One
+-   [x] Level14 Gatekeeper Two
+-   [x] Level15 Naught Coin
+-   [x] Level16 Preservation
+-   [x] Level17 Recovery
+-   [x] Level18 MagicNumber
+-   [x] Level19 Alien Codex
+-   [x] Level20 Denial
+-   [x] Level21 Shop
+-   [x] Level22 Dex
+-   [x] Level23 Dex Two
+-   [x] Level24 Puzzle Wallet
+-   [x] Level25 Motorbike
+-   [x] Level26 DoubleEntryPoint
+-   [x] Level27 Good Samaritan
+-   [x] Level28 Gatekeeper Three
+-   [x] Level29 Switch
+
 ## ~~Warnings - some challenges are removed due to compiler incompatibility~~
 
 ~~The following challenges are not part of this repo:~~
