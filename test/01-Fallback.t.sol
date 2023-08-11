@@ -15,7 +15,7 @@ contract FallbackTest is DSTest {
         ethernaut = new Ethernaut();
 
         // set hacker's balance to 1 Ether, use it when you need!
-        // vm.deal(hacker, 1 ether); 
+        // vm.deal(hacker, 1 ether);
     }
 
     function testFallbackHack() public {
@@ -31,14 +31,12 @@ contract FallbackTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-        // implement your solution here 
+        // implement your solution here
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }
