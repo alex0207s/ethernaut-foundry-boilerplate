@@ -32,8 +32,8 @@ contract CoinFlipTest is DSTest {
         //////////////////
         CoinFlipAttack attacker = new CoinFlipAttack();
 
-        for (uint256 i = 0; i < 10; i++) {
-            vm.roll(i + 1);
+        for (uint256 i = 2; i < 12; i++) {
+            vm.roll(i);
             ethernautCoinFlip.flip(attacker.guessGod());
         }
 
